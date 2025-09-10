@@ -1,0 +1,3 @@
+CONFIG_DIR="$HOME/.config"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+

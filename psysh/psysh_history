@@ -1,0 +1,17 @@
+config('database.connections.mysql.host');
+exit
+config('database.connections.mysql.host');
+exit
+$user = User::find(2);
+$user = User::;
+$user = User::find("PIS003S");
+$user = User::where('userid','PIS003S');
+$user = User::where('userid','PIS003S')->first();
+$plain=Str::random(60);
+$user = User::where('email','pisadmin@pis.edu.gh')->first();
+$plain=Str::random(60);
+$user->api_token=hash('sha256', $plain);
+$user->save();
+exit()
+$class = new \App\Http\Controllers\SuperAdmin\ClassTeacherController;
+in_array('fetchClassTeacher', get_class_methods($class));
