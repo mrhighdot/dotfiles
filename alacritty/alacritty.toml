@@ -1,0 +1,19 @@
+[env]
+WINIT_X11_SCALE_FACTOR = "1.0"
+
+[font]
+normal.family = "Cascadia Code NF"
+normal.style="Bold"
+size=14
+
+[window]
+decorations="Buttonless"
+startup_mode="Maximized"
+dynamic_padding=true
+option_as_alt="Both"
+opacity=0.9
+padding = {x = 8, y= 8}
+
+[cursor]
+style = {shape='Underline',blinking='Always'}
+thickness = 0.3
