@@ -13,6 +13,9 @@ local lg = require 'custom.plugins.lazygit.lazygit'
 local tabby = require 'custom.plugins.tabby.tabby'
 local flutter = require 'custom.plugins.flutter-tools.tools'
 local laravel = require 'custom.plugins.laravel.laravel'
+local multi = require 'custom.plugins.vim-visual-multi.init'
+local dev_docs = require 'custom.plugins.dev-docs.init'
+local follow_link = require 'custom.plugins.follow-link.init'
 
 return {
   comments,
@@ -27,4 +30,7 @@ return {
   tabby,
   noice,
   laravel,
+  multi,
+  dev_docs,
+  follow_link,
 }

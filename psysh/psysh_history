@@ -25,3 +25,25 @@ DB::table('failed_jobs')->latest()->first();
 DB::table('jobs')->delete();
 DB::table('failed_jobs')->delete();
 exit
+config('database.connections.union_mysql.database')
+config('database.connections.union_mysql.url')
+config('database.connections.union_mysql')
+parse_url('union_mysql')
+$url = 'union_mysql';
+$parsed = parse_url($url);
+ltrim($parsed['path'] ?? '', '/');
+(new \Illuminate\Database\Connectors\ConnectionFactory(app()))->parseUrl(['url' => 'union_mysql'])
+\Illuminate\Support\Arr::except(
+    (new \Illuminate\Database\Connectors\ConnectionFactory(app()))->parseUrl(['url' => 'union_mysql']),
+    ['driver', 'name']
+)
+clear
+app()->version()
+DB::connection('union_mysql')->getDatabaseName()
+$url = 'union_mysql';
+parse_url($url)['path'];
+ltrim('union_mysql', 'u');
+ltrim('union_mysql', 'union_');  // or just 'u'
+$url = parse_url('union_mysql');
+$scheme = $url['scheme'] ?? '';
+ltrim($url['path'] ?? '', $scheme);
