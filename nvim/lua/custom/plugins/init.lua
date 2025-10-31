@@ -6,7 +6,7 @@ local pairs = require 'custom.plugins.pairs.autopairs'
 -- local copilot = require 'custom.plugins.github.copilot'
 local coc = require 'custom.plugins.coc.coc'
 -- local avante = require 'custom.plugins.avante.avante'
-local vscode = require 'custom.plugins.theme.hybrid'
+local vscode = require 'custom.plugins.theme.tokyo-dark'
 local formatter = require 'custom.plugins.formatter.formatter'
 local blade = require 'custom.plugins.blade.blade'
 local lg = require 'custom.plugins.lazygit.lazygit'
@@ -28,7 +28,7 @@ return {
   formatter,
   lg,
   tabby,
-  noice,
+  -- noice,
   laravel,
   multi,
   dev_docs,

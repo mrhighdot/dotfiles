@@ -622,7 +622,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        blade = { 'blade-formatter' },
+        blade = { 'prettier' },
         php = { 'php_cs_fixer' },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
@@ -907,7 +907,21 @@ vim.filetype.add {
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.blade.php',
   callback = function()
-    vim.cmd('!blade-formatter --write ' .. vim.fn.expand '%')
+    local bufnr = vim.api.nvim_get_current_buf()
+    local filepath = vim.api.nvim_buf_get_name(bufnr)
+
+    vim.fn.jobstart({ 'blade-formatter', '--write', filepath }, {
+      on_exit = function(_, exit_code)
+        if exit_code == 0 then
+          -- Reload buffer to show changes
+          vim.schedule(function()
+            vim.cmd 'checktime'
+          end)
+        else
+          vim.notify('Prettier formatting failed', vim.log.levels.ERROR)
+        end
+      end,
+    })
   end,
 })
 --

@@ -47,3 +47,80 @@ ltrim('union_mysql', 'union_');  // or just 'u'
 $url = parse_url('union_mysql');
 $scheme = $url['scheme'] ?? '';
 ltrim($url['path'] ?? '', $scheme);
+Mail::raw('Test email', function($message) {
+    $message->to('tiwiyag599@ametitas.com')->subject('Test');
+});
+config('mail.default');
+config('mail.mailers.smtp');
+try {
+    $transport = new Swift_SmtpTransport('smtp-gitplus.alwaysdata.net', 587, 'tls');
+    $transport->setUsername('pis@gitplus.app');
+    $transport->setPassword('pisS@246');
+    $mailer = new Swift_Mailer($transport);
+    
+    $message = (new Swift_Message('Test'))
+        ->setFrom(['pis@gitplus.app' => 'Test Sender'])
+        ->setTo(['tiwiyag599@ametitas.com'])
+        ->setBody('Test email body');
+    
+    $result = $mailer->send($message);
+    echo "Email sent! Result: " . $result;
+} catch (\Exception $e) {
+    echo "SMTP Error: " . $e->getMessage();
+}
+try {
+    $transport = new Swift_SmtpTransport('smtp-gitplus.alwaysdata.net', 587, 'tls');
+    $transport->setUsername('pis@gitplus.app');
+    $transport->setPassword('pisS@246');
+    $mailer = new Swift_Mailer($transport);
+    
+    $message = (new Swift_Message('Test'))
+        ->setFrom(['pis@gitplus.app' => 'Test Sender'])
+        ->setTo(['tiwiyag599@ametitas.com'])
+        ->setBody('Test email body');
+    
+    $result = $mailer->send($message);
+    echo "Email sent! Result: " . $result;
+} catch (\Exception $e) {
+    echo "SMTP Error: " . $e->getMessage();
+}
+clear
+try {
+    $transport = new Swift_SmtpTransport('smtp-gitplus.alwaysdata.net', 587, null);
+    $transport->setUsername('pis@gitplus.app');
+    $transport->setPassword('pisS@246');
+    $mailer = new Swift_Mailer($transport);
+    
+    $message = (new Swift_Message('Test'))
+        ->setFrom(['pis@gitplus.app' => 'Test Sender'])
+        ->setTo(['tiwiyag599@ametitas.com'])
+        ->setBody('Test email body');
+    
+    $result = $mailer->send($message);
+    echo "Email sent! Result: " . $result;
+} catch (\Exception $e) {
+    echo "SMTP Error: " . $e->getMessage();
+}
+try {
+    $transport = new Swift_SmtpTransport('smtp-gitplus.alwaysdata.net', 465, 'ssl');
+    $transport->setUsername('sendmail@gitplus.app');
+    $transport->setPassword('e#K7[D4|Iy');
+    $mailer = new Swift_Mailer($transport);
+    
+    $message = (new Swift_Message('Test Email'))
+        ->setFrom(['sendmail@gitplus.app' => 'GitPlus Mailer'])
+        ->setTo(['tiwiyag599@ametitas.com'])
+        ->setBody('This is a test email from Laravel');
+    
+    $result = $mailer->send($message);
+    echo "Email sent! Result: " . $result;
+} catch (\Exception $e) {
+    echo "SMTP Error: " . $e->getMessage();
+}
+$school = DB::table('tblschool')->where('school_code', '3000001')->first();
+Mail::to('tiwiyag599@ametitas.com')->send(new App\Mail\AssessmentUpdateMail(now(), $school, '2025-10-24'));
+clear
+$school = DB::table('tblschool')->where('school_code', '3000001')->first();
+Mail::to('tiwiyag599@ametitas.com')->send(new App\Mail\AssessmentUpdateMail(now(), $school, '2025-10-24'));
+$school = DB::table('tblschool')->where('school_code', '3000001')->first();
+Mail::to('tiwiyag599@ametitas.com')->send(new App\Mail\AssessmentUpdateMail(now(), $school, '2025-10-24'));
