@@ -925,17 +925,17 @@
         },
         {
             "name": "laravel/installer",
-            "version": "v5.15.0",
-            "version_normalized": "5.15.0.0",
+            "version": "v5.23.0",
+            "version_normalized": "5.23.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/installer.git",
-                "reference": "0dc17fbef4f7ef13cd28858648deac7cfa4bdddc"
+                "reference": "f599364a2db17d94405aed91a21b3308953532aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/installer/zipball/0dc17fbef4f7ef13cd28858648deac7cfa4bdddc",
-                "reference": "0dc17fbef4f7ef13cd28858648deac7cfa4bdddc",
+                "url": "https://api.github.com/repos/laravel/installer/zipball/f599364a2db17d94405aed91a21b3308953532aa",
+                "reference": "f599364a2db17d94405aed91a21b3308953532aa",
                 "shasum": ""
             },
             "require": {
@@ -951,7 +951,7 @@
                 "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^10.4"
             },
-            "time": "2025-05-20T17:14:23+00:00",
+            "time": "2025-10-28T15:22:27+00:00",
             "bin": [
                 "bin/laravel"
             ],
@@ -978,7 +978,7 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/installer/issues",
-                "source": "https://github.com/laravel/installer/tree/v5.15.0"
+                "source": "https://github.com/laravel/installer/tree/v5.23.0"
             },
             "install-path": "../laravel/installer"
         },

@@ -23,10 +23,10 @@ lctrl + shift - 9 : yabai -m window --space 9
 lctrl + shift - 0 : yabai -m window --space 10
 
 # ⬆⬇⬅➡ Focus window in direction
-lctrl - h : yabai -m window --focus west
-lctrl - l : yabai -m window --focus east
-lctrl - j : yabai -m window --focus south
-lctrl - k : yabai -m window --focus north
+lctrl + shift - h : yabai -m window --focus west
+lctrl + shift - l : yabai -m window --focus east
+lctrl + shift - j : yabai -m window --focus south
+lctrl + shift - k : yabai -m window --focus north
 
 # 🔁 Rotate layout
 lctrl + alt - r : yabai -m space --rotate 90

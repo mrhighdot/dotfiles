@@ -1,19 +1,19 @@
 [env]
-WINIT_X11_SCALE_FACTOR = "1.0"
+TERM = "xterm-256color"
 
 [font]
 normal.family = "Cascadia Code NF"
 normal.style="Bold"
-size=14
+size=16
 
 [window]
 decorations="Buttonless"
 startup_mode="Maximized"
 dynamic_padding=true
 option_as_alt="Both"
-opacity=0.9
-padding = {x = 8, y= 8}
+opacity=0.95
+padding = {x = 12, y= 12}
 
 [cursor]
-style = {shape='Underline',blinking='Always'}
+style = {shape='Block',blinking='Always'}
 thickness = 0.3

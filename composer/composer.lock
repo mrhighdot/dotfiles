@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "955b7282c0d9fba245d23c4a73f3f4f5",
+    "content-hash": "34819d47ad48a522c2d3233626f2624a",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -895,16 +895,16 @@
         },
         {
             "name": "laravel/installer",
-            "version": "v5.15.0",
+            "version": "v5.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/installer.git",
-                "reference": "0dc17fbef4f7ef13cd28858648deac7cfa4bdddc"
+                "reference": "f599364a2db17d94405aed91a21b3308953532aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/installer/zipball/0dc17fbef4f7ef13cd28858648deac7cfa4bdddc",
-                "reference": "0dc17fbef4f7ef13cd28858648deac7cfa4bdddc",
+                "url": "https://api.github.com/repos/laravel/installer/zipball/f599364a2db17d94405aed91a21b3308953532aa",
+                "reference": "f599364a2db17d94405aed91a21b3308953532aa",
                 "shasum": ""
             },
             "require": {
@@ -945,9 +945,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/installer/issues",
-                "source": "https://github.com/laravel/installer/tree/v5.15.0"
+                "source": "https://github.com/laravel/installer/tree/v5.23.0"
             },
-            "time": "2025-05-20T17:14:23+00:00"
+            "time": "2025-10-28T15:22:27+00:00"
         },
         {
             "name": "laravel/prompts",
