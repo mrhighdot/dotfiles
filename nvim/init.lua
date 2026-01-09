@@ -218,7 +218,7 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    branch = 'master',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -629,33 +629,6 @@ require('lazy').setup({
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
       },
-      {
-        -- Add a Treesitter parser for Laravel Blade to provide Blade syntax highlighting.
-        'nvim-treesitter/nvim-treesitter',
-        opts = function(_, opts)
-          vim.list_extend(opts.ensure_installed, {
-            'blade',
-            'php_only',
-          })
-        end,
-        config = function(_, opts)
-          vim.filetype.add {
-            pattern = {
-              ['.*%.blade%.php'] = 'blade',
-            },
-          }
-
-          require('nvim-treesitter.configs').setup(opts)
-          require('nvim-treesitter.parsers').get_parser_configs().blade = {
-            install_info = {
-              url = 'https://github.com/EmranMR/tree-sitter-blade',
-              files = { 'src/parser.c' },
-              branch = 'main',
-            },
-            filetype = 'blade',
-          }
-        end,
-      },
     },
   },
 
@@ -666,6 +639,7 @@ require('lazy').setup({
       -- Snippet Engine & its associated nvim-cmp source
       {
         'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
         build = (function()
           -- Build Step is needed for regex support in snippets.
           -- This step is not supported in many windows environments.
@@ -679,12 +653,12 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -815,45 +789,76 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
-    opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'php', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'typescript' },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true },
-    },
-    config = function(_, opts)
-      -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
-      ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.configs').setup(opts)
-
-      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-      parser_config.blade = {
-        install_info = {
-          url = 'https://github.com/EmranMR/tree-sitter-blade',
-          files = { 'src/parser.c' },
-          branch = 'main',
+    config = function()
+      -- Set up filetype detection FIRST
+      vim.filetype.add {
+        extension = { ts = 'typescript', ejs = 'html', hbs = 'html', tsx = 'typescriptreact', handlebars = 'html' },
+        pattern = {
+          ['.*%.blade%.php'] = 'blade',
         },
-        filetype = 'blade',
       }
 
-      -- There are additional nvim-treesitter modules that you can use to interact
-      -- with nvim-treesitter. You should go explore a few and see what interests you:
-      --
-      --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-      --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-      --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+      -- Register the blade parser with nvim-treesitter
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'TSUpdate',
+        callback = function()
+          require('nvim-treesitter.parsers').blade = {
+            install_info = {
+              url = 'https://github.com/EmranMR/tree-sitter-blade',
+              files = { 'src/parser.c' },
+              branch = 'main',
+              revision = 'main',
+            },
+            tier = 1,
+          }
+        end,
+      })
+
+      -- Register the blade language with treesitter
+      vim.treesitter.language.register('blade', 'blade')
+
+      -- Install the parsers you need
+      require('nvim-treesitter').install {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'php',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'typescript',
+        'tsx',
+        'javascript',
+        'jsx',
+        'blade',
+        'php_only',
+      }
+
+      -- Enable highlighting for blade files
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'blade' },
+        callback = function()
+          vim.treesitter.start()
+        end,
+      })
     end,
+  },
+  {
+    'ricardoramirezr/blade-nav.nvim',
+    dependencies = {
+      'hrsh7th/nvim-cmp',
+    },
+    ft = { 'blade', 'php' },
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
@@ -900,30 +905,32 @@ require('lazy').setup({
   },
 })
 
-vim.filetype.add {
-  extension = { ts = 'typescript', ejs = 'html', hbs = 'html', tsx = 'typescriptreact', handlebars = 'html' },
-}
+-- vim.filetype.add {
+--   pattern = {
+--     ['.*%.blade%.php'] = 'blade',
+--   },
+-- }
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.blade.php',
-  callback = function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local filepath = vim.api.nvim_buf_get_name(bufnr)
-
-    vim.fn.jobstart({ 'blade-formatter', '--write', filepath }, {
-      on_exit = function(_, exit_code)
-        if exit_code == 0 then
-          -- Reload buffer to show changes
-          vim.schedule(function()
-            vim.cmd 'checktime'
-          end)
-        else
-          vim.notify('Prettier formatting failed', vim.log.levels.ERROR)
-        end
-      end,
-    })
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = '*.blade.php',
+--   callback = function()
+--     local bufnr = vim.api.nvim_get_current_buf()
+--     local filepath = vim.api.nvim_buf_get_name(bufnr)
+--
+--     vim.fn.jobstart({ 'blade-formatter', '--write', filepath }, {
+--       on_exit = function(_, exit_code)
+--         if exit_code == 0 then
+--           -- Reload buffer to show changes
+--           vim.schedule(function()
+--             vim.cmd 'checktime'
+--           end)
+--         else
+--           vim.notify('Prettier formatting failed', vim.log.levels.ERROR)
+--         end
+--       end,
+--     })
+--   end,
+-- })
 --
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
